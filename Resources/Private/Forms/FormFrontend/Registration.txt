@@ -1,0 +1,5 @@
+Name: {form.formstate.formValues.firstname} {form.formstate.formValues.lastname}
+
+Username: {form.formstate.formValues.username}
+
+{form.formstate.formValues.confirmurl}

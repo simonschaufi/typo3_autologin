@@ -1,0 +1,7 @@
+prototypes:
+  registration:
+    __inheritances:
+      10: 'prototypes.standard'
+    finishersDefinition:
+      CryptFinisher:
+        implementationClassName: 'SimonSchaufi\Autologin\Domain\Finishers\CryptFinisher'

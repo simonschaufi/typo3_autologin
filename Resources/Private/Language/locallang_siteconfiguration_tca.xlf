@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2024-06-19T13:08:30Z">
+		<header/>
+		<body>
+			<trans-unit id="site.autologinSuccessPage">
+				<source><![CDATA[Autologin success page id]]></source>
+			</trans-unit>
+			<trans-unit id="site.autologinErrorPage">
+				<source><![CDATA[Autologin error page id]]></source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

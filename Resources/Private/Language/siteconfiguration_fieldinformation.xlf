@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2024-06-19T13:09:18Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+			<trans-unit id="site.autologinSuccessPage">
+				<source><![CDATA[Set the page id of the page to redirect to after a successful autologin]]></source>
+			</trans-unit>
+			<trans-unit id="site.autologinErrorPage">
+				<source><![CDATA[Set the page id of the page to redirect to after an error occurred during autologin]]></source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  SimonSchaufi\Autologin\:
+    resource: '../Classes/*'
+
+  SimonSchaufi\Autologin\Domain\Model\Renderable\SetConfirmUrl:
+    public: true
+
+  SimonSchaufi\Autologin\Service\AutoLoginService:
+    public: true
+
+  # Event listener
+
+  SimonSchaufi\Autologin\EventListener\BeforeRequestTokenProcessedListener:
+    tags:
+      - name: event.listener
+        identifier: 'typo3-autologin/before-request-token-processed'

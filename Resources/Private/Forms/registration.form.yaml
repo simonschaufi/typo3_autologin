@@ -1,0 +1,213 @@
+
+renderingOptions:
+  submitButtonLabel: Register
+identifier: registration
+label: 'Registration form'
+prototypeName: registration
+type: Form
+finishers:
+  -
+    identifier: CryptFinisher
+    options:
+      field: password
+  -
+    options:
+      table: fe_users
+      mode: insert
+      databaseColumnMappings:
+        pid:
+          value: '4'
+        crdate:
+          value: '{__currentTimestamp}'
+        tstamp:
+          value: '{__currentTimestamp}'
+        usergroup:
+          value: '1'
+        disable:
+          value: '1'
+        password:
+          value: '{Crypt.password}'
+        description:
+          value: 'Registered via form'
+      elements:
+        email:
+          mapOnDatabaseColumn: email
+        firstname:
+          mapOnDatabaseColumn: first_name
+        lastname:
+          mapOnDatabaseColumn: last_name
+        username:
+          mapOnDatabaseColumn: username
+        uniquehash:
+          mapOnDatabaseColumn: uniquehash
+    identifier: SaveToDatabase
+  -
+    options:
+      subject: 'Registration confirmation'
+      senderAddress: no-reply@typo3.org
+      senderName: 'TYPO3 GmbH'
+      attachUploads: false
+      templateName: Registration
+      templateRootPaths:
+        100: 'EXT:typo3_autologin/Resources/Private/Forms/'
+      translation:
+        language: default
+      recipients:
+        '{email}': '{firstname} {lastname}'
+      addHtmlPart: true
+    identifier: EmailToReceiver
+  -
+    options:
+      pageUid: '1'
+      additionalParameters: ''
+    identifier: Redirect
+renderables:
+  -
+    renderingOptions:
+      previousButtonLabel: 'Previous step'
+      nextButtonLabel: 'Next step'
+    type: Page
+    identifier: page-1
+    label: ''
+    renderables:
+      -
+        defaultValue: ''
+        identifier: uniquehash
+        type: Hidden
+      -
+        defaultValue: ''
+        identifier: confirmurl
+        type: Hidden
+      -
+        defaultValue: '5'
+        identifier: verifypid
+        type: Hidden
+      -
+        type: GridRow
+        identifier: gridrow-4
+        label: 'Grid: Row'
+        renderables:
+          -
+            type: Fieldset
+            identifier: fieldset-1
+            label: ''
+            properties:
+              gridColumnClassAutoConfiguration:
+                viewPorts:
+                  lg:
+                    numbersOfColumnsToUse: '8'
+                  md:
+                    numbersOfColumnsToUse: '8'
+            renderables:
+              -
+                type: GridRow
+                identifier: gridrow-5
+                label: 'Grid: Row'
+                renderables:
+                  -
+                    defaultValue: ''
+                    type: Text
+                    identifier: firstname
+                    label: Firstname
+                    properties:
+                      fluidAdditionalAttributes:
+                        required: required
+                        minlength: '0'
+                        maxlength: '50'
+                      gridColumnClassAutoConfiguration:
+                        viewPorts:
+                          lg:
+                            numbersOfColumnsToUse: '40'
+                          md:
+                            numbersOfColumnsToUse: '40'
+                    validators:
+                      -
+                        identifier: NotEmpty
+                      -
+                        options:
+                          minimum: '0'
+                          maximum: '50'
+                        identifier: StringLength
+                  -
+                    defaultValue: ''
+                    type: Text
+                    identifier: lastname
+                    label: Lastname
+                    properties:
+                      fluidAdditionalAttributes:
+                        required: required
+                        minlength: '0'
+                        maxlength: '50'
+                      elementDescription: ''
+                      gridColumnClassAutoConfiguration:
+                        viewPorts:
+                          lg:
+                            numbersOfColumnsToUse: '45'
+                          md:
+                            numbersOfColumnsToUse: '45'
+                    validators:
+                      -
+                        identifier: NotEmpty
+                      -
+                        options:
+                          minimum: '0'
+                          maximum: '50'
+                        identifier: StringLength
+              -
+                defaultValue: ''
+                type: Text
+                identifier: username
+                label: Username
+                properties:
+                  fluidAdditionalAttributes:
+                    required: required
+                    placeholder: Username
+                    minlength: '0'
+                    maxlength: '255'
+                validators:
+                  -
+                    identifier: NotEmpty
+                  -
+                    options:
+                      minimum: '0'
+                      maximum: '255'
+                    identifier: StringLength
+              -
+                defaultValue: ''
+                type: Text
+                identifier: email
+                label: 'Email address'
+                properties:
+                  fluidAdditionalAttributes:
+                    required: required
+                    minlength: '0'
+                    maxlength: '80'
+                validators:
+                  -
+                    identifier: NotEmpty
+                  -
+                    identifier: EmailAddress
+                  -
+                    options:
+                      minimum: '0'
+                      maximum: '80'
+                    identifier: StringLength
+              -
+                properties:
+                  confirmationLabel: 'Repeat password'
+                  elementDescription: ''
+                  fluidAdditionalAttributes:
+                    required: required
+                    minlength: '8'
+                    maxlength: '50'
+                type: AdvancedPassword
+                identifier: password
+                label: Password
+                validators:
+                  -
+                    identifier: NotEmpty
+                  -
+                    options:
+                      minimum: '8'
+                      maximum: '50'
+                    identifier: StringLength

@@ -1,0 +1,25 @@
+{
+    "name": "simonschaufi/typo3-autologin",
+    "description": "Autologin for TYPO3",
+    "license": "GPL-2.0-or-later",
+    "type": "typo3-cms-extension",
+    "require": {
+        "typo3/cms-felogin": "^12.4",
+        "typo3/cms-form": "^12.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimonSchaufi\\Autologin\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SimonSchaufi\\Autologin\\Tests\\": "Tests"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "typo3_autologin"
+        }
+    }
+}

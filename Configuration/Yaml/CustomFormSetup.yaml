@@ -1,0 +1,7 @@
+imports:
+  - { resource: "./Prototypes/registration.yaml" }
+
+persistenceManager:
+  allowSaveToExtensionPaths: true
+  allowedExtensionPaths:
+    10: EXT:typo3_autologin/Resources/Private/Forms/
