@@ -7,6 +7,8 @@ namespace SimonSchaufi\Autologin\Domain\Model\Renderable;
 use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface;
 use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use SimonSchaufi\Autologin\Utility\RegistrationTokenUtility;
+
 
 class SetConfirmUrl
 {
@@ -32,11 +34,16 @@ class SetConfirmUrl
             $uniqueHash = $formRuntime->getFormState()?->getFormValue('uniquehash');
             $elementValue = $this->contentObjectRenderer->typoLink_URL([
                 'parameter' => 't3://page?uid=' . $verifyPid,
-                'additionalParams' => '&uniquehash=' . $uniqueHash,
+                'additionalParams' => '&reg_token=' . RegistrationTokenUtility::createToken(
+                    $uniqueHash, 
+                    strtotime('+2 day') // TODO: make time configurable
+                ),
                 'forceAbsoluteUrl' => true,
             ]);
         }
 
         return $elementValue;
     }
+
+    
 }
