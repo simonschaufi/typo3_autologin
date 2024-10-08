@@ -9,7 +9,6 @@ use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use SimonSchaufi\Autologin\Utility\RegistrationTokenUtility;
 
-
 class SetConfirmUrl
 {
     public function __construct(

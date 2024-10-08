@@ -21,6 +21,7 @@ use TYPO3\CMS\Extbase\Exception as ExtbaseException;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Typolink\PageLinkBuilder;
 use TYPO3\CMS\Frontend\Typolink\UnableToLinkException;
+use SimonSchaufi\Autologin\Utility\RegistrationTokenUtility;
 
 /**
  * This class handles the email verification process after registration
@@ -39,12 +40,15 @@ class VerifyRegistration implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $uniqueHash = $request->getQueryParams()['uniquehash'] ?? null;
-        if ($uniqueHash === null) {
+        $token = $request->getQueryParams()['reg_token'] ?? null;
+        if ($token === null) {
             return $handler->handle($request);
         }
 
-        $userUid = $this->getUserId($uniqueHash);
+        $tokenPayload = RegistrationTokenUtility::decode($token);
+        
+
+        $userUid = $this->getUserId($tokenPayload['sub']);
         if ($userUid === false) {
             // unset uniquehash, otherwise we will end up in a redirect loop
             $request = $request->withQueryParams([]);
@@ -55,6 +59,7 @@ class VerifyRegistration implements MiddlewareInterface
 
         // Activate Autologin
         $this->loginUtility->setAutologinHmac((int)$userUid);
+        RegistrationTokenUtility::markAsUsed($tokenPayload);
 
         return $this->redirectToSuccessPage($request);
     }
