@@ -5,7 +5,8 @@
     "type": "typo3-cms-extension",
     "require": {
         "typo3/cms-felogin": "^12.4",
-        "typo3/cms-form": "^12.4"
+        "typo3/cms-form": "^12.4",
+        "firebase/php-jwt": "^6.10.1"
     },
     "autoload": {
         "psr-4": {
